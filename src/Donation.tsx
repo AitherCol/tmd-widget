@@ -36,7 +36,7 @@ export default function Donation({
 			const playTts = () => {
 				if (event.donation.audio) {
 					const audio = new Audio(event.donation.audio);
-					audio.volume = 1;
+					audio.volume = event.page.voice_volume_percent / 100;
 					audioRef.current = audio;
 					audio.play().catch(e => {
 						console.error(e);
