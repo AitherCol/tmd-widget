@@ -34,7 +34,11 @@ export default function Donation({
 
 		const playSound = () => {
 			const playTts = () => {
-				if (event.page.voice_enabled) {
+				if (
+					formatMessage(event).voice.trim() !== "" &&
+					event.page.voice_enabled &&
+					event.donation.amount >= event.page.voice_min_amount
+				) {
 					if (event.page.voice_type === "maxim") {
 						try {
 							const audio = new Audio(
