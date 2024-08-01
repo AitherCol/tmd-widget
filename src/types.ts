@@ -8,9 +8,10 @@ export interface DonationEvent {
 export interface Donation {
 	id: number;
 	name: string;
-	message: string;
+	message: string | null;
 	amount: number;
 	currency: string;
+	audio: string | null;
 }
 
 export interface Widget {

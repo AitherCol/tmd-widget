@@ -34,51 +34,64 @@ export default function Donation({
 
 		const playSound = () => {
 			const playTts = () => {
-				if (
-					formatMessage(event).voice.trim() !== "" &&
-					event.page.voice_enabled &&
-					event.donation.amount >= event.page.voice_min_amount
-				) {
-					if (event.page.voice_type === "maxim") {
-						try {
-							const audio = new Audio(
-								`https://api.tipmeadollar.com/tts?text=${encodeURIComponent(
-									formatMessage(event).voice.trim()
-								)}&speed=${event.page.voice_speed}`
-							);
-							audio.volume = event.page.voice_volume_percent / 100;
-							audioRef.current = audio;
-							audio.play().catch(e => {
-								console.error(e);
+				if (event.donation.audio) {
+					const audio = new Audio(event.donation.audio);
+					audio.volume = 1;
+					audioRef.current = audio;
+					audio.play().catch(e => {
+						console.error(e);
+						endDonate(1500);
+					});
+					audio.onended = () => {
+						endDonate(1500);
+					};
+				} else {
+					if (
+						formatMessage(event).voice.trim() !== "" &&
+						event.page.voice_enabled &&
+						event.donation.amount >= event.page.voice_min_amount
+					) {
+						if (event.page.voice_type === "maxim") {
+							try {
+								const audio = new Audio(
+									`https://api.tipmeadollar.com/tts?text=${encodeURIComponent(
+										formatMessage(event).voice.trim()
+									)}&speed=${event.page.voice_speed}`
+								);
+								audio.volume = event.page.voice_volume_percent / 100;
+								audioRef.current = audio;
+								audio.play().catch(e => {
+									console.error(e);
+									endDonate(1500);
+								});
+								audio.onended = () => {
+									endDonate(1500);
+								};
+							} catch (error) {
+								console.error(error);
 								endDonate(1500);
-							});
-							audio.onended = () => {
+							}
+						} else {
+							const utterance = new SpeechSynthesisUtterance(
+								formatMessage(event).voice.trim()
+							);
+							utterance.lang = "ru-RU";
+							const voice = voices.find(
+								e => e.name.startsWith("Google") && e.lang === "ru-RU"
+							);
+							if (voice) {
+								utterance.voice = voice;
+							}
+							utterance.volume = event.page.voice_volume_percent / 100;
+							utterance.rate = event.page.voice_speed;
+							utterance.onend = () => {
 								endDonate(1500);
 							};
-						} catch (error) {
-							console.error(error);
-							endDonate(1500);
+							speechSynthesis.speak(utterance);
 						}
 					} else {
-						const utterance = new SpeechSynthesisUtterance(
-							formatMessage(event).voice.trim()
-						);
-						utterance.lang = "ru-RU";
-						const voice = voices.find(
-							e => e.name.startsWith("Google") && e.lang === "ru-RU"
-						);
-						if (voice) {
-							utterance.voice = voice;
-						}
-						utterance.volume = event.page.voice_volume_percent / 100;
-						utterance.rate = event.page.voice_speed;
-						utterance.onend = () => {
-							endDonate(1500);
-						};
-						speechSynthesis.speak(utterance);
+						endDonate(event.widget.duration * 1000);
 					}
-				} else {
-					endDonate(event.widget.duration * 1000);
 				}
 			};
 
