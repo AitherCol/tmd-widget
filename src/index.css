@@ -133,7 +133,7 @@ video {
 .donation-title {
 	display: table-cell;
 	padding: 10px;
-	word-wrap: break-word;
+	word-wrap: break-all;
 	text-align: center;
 }
 
