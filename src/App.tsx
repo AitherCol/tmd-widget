@@ -25,8 +25,12 @@ function App() {
 		});
 
 		socket.on("donations:new", data => {
-			console.log("New donation received", data);
-			addDonationToQueue({ ...JSON.parse(data), socket });
+			const event = JSON.parse(data);
+			console.log("New donation received", event);
+
+			if (!queueRef.current.find(e => e.donation.id === event.donation.id)) {
+				addDonationToQueue({ ...event, socket });
+			}
 		});
 
 		window.speechSynthesis.onvoiceschanged = function () {
