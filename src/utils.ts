@@ -30,7 +30,7 @@ export function formatMessage(event: DonationEvent) {
 	);
 	if (event.page.remove_links) {
 		text = removeLinks(text, "[ссылка удалена]");
-		voiceText = removeLinks(text);
+		voiceText = removeLinks(voiceText);
 	}
 	return { text, voice: removeEmojis(voiceText) };
 }
