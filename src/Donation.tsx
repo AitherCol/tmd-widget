@@ -19,7 +19,7 @@ export default function Donation({
 
 	useEffect(() => {
 		const endDonate = async (timeout?: number) => {
-			if (timeout && timeout === 0) {
+			if (timeout && timeout !== 0) {
 				await sleep(timeout);
 			}
 			if (timeout !== 0) {
