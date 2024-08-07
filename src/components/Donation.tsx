@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { DonationEvent, FontSettings } from "./types";
-import { formatMessage, formatName, sleep } from "./utils";
+import { DonationEvent, FontSettings } from "../types";
+import { formatMessage, formatName, sleep } from "../utils";
 
 export default function Donation({
 	event,

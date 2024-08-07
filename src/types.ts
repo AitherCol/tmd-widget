@@ -12,6 +12,7 @@ export interface Donation {
 	amount: number;
 	currency: string;
 	audio: string | null;
+	paid_at: string;
 }
 
 export interface Widget {
