@@ -65,3 +65,15 @@
 .skip-button:active {
 	background: #fe1f1c;
 }
+
+.not-found {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	color: white;
+}
+
+.not-found-text {
+	opacity: 0.5;
+}

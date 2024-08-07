@@ -103,25 +103,33 @@ export default function LastDonations() {
 				pauseOnHover
 				theme="dark"
 			/>
-			<button
-				className="skip-button"
-				onClick={async () => {
-					try {
-						await axios.post(
-							`https://api.tipmeadollar.com/internal/socket/skip`,
-							{ token: token }
-						);
-						toast.success("донат пропущен!");
-					} catch (error) {
-						toast.error("произошла неизвестная ошибка!");
-					}
-				}}
-			>
-				пропустить текущий донат
-			</button>
-			{donations.map(donation => (
-				<DonationComponent donation={donation} />
-			))}
+			{donations.length !== 0 ? (
+				<div className="not-found">
+					<p className="not-found-text">донатов не найдено</p>
+				</div>
+			) : (
+				<>
+					<button
+						className="skip-button"
+						onClick={async () => {
+							try {
+								await axios.post(
+									`https://api.tipmeadollar.com/internal/socket/skip`,
+									{ token: token }
+								);
+								toast.success("донат пропущен!");
+							} catch (error) {
+								toast.error("произошла неизвестная ошибка!");
+							}
+						}}
+					>
+						пропустить текущий донат
+					</button>
+					{donations.map(donation => (
+						<DonationComponent donation={donation} />
+					))}
+				</>
+			)}
 		</div>
 	);
 }
