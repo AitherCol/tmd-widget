@@ -103,7 +103,7 @@ export default function LastDonations() {
 				pauseOnHover
 				theme="dark"
 			/>
-			{donations.length !== 0 ? (
+			{donations.length === 0 ? (
 				<div className="not-found">
 					<p className="not-found-text">донатов не найдено</p>
 				</div>
