@@ -51,12 +51,14 @@ export default function Donation({
 						event.page.voice_enabled &&
 						event.donation.amount >= event.page.voice_min_amount
 					) {
-						if (event.page.voice_type === "maxim") {
+						if (event.page.voice_type !== "svetlana") {
 							try {
 								const audio = new Audio(
 									`https://api.tipmeadollar.com/tts?text=${encodeURIComponent(
 										formatMessage(event).voice.trim()
-									)}&speed=${event.page.voice_speed}`
+									)}&speed=${event.page.voice_speed}&voice=${
+										event.page.voice_type
+									}`
 								);
 								audio.volume = event.page.voice_volume_percent / 100;
 								audioRef.current = audio;

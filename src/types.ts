@@ -46,5 +46,5 @@ export interface Page {
 	blacklisted_words: string[];
 	created_at: string;
 	voice_speed: number;
-	voice_type: "maxim" | "svetlana";
+	voice_type: "maxim" | "svetlana" | "tatiana";
 }
