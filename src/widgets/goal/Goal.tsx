@@ -94,6 +94,8 @@ function Goal() {
 									backgroundColor: goal.indicator_color,
 									borderRadius: `${goal.border_radius}vw`,
 									minHeight: `${goal.indicator_height}vw`,
+									borderColor: goal.stroke_color,
+									borderWidth: `${goal.stroke_radius}vw`,
 								}}
 							>
 								<div
