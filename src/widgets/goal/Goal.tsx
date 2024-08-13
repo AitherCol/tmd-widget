@@ -1,11 +1,13 @@
 import axios from "axios";
 import moment from "moment";
+import "moment/dist/locale/ru";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { io } from "socket.io-client";
 import { Goal as GoalType } from "../../types";
 import { calculateProgress, getFontStyles } from "../../utils";
+
 import "./Goal.css";
 
 moment.locale("ru");
@@ -149,7 +151,7 @@ function Goal() {
 										textAlign: "center",
 									}}
 								>
-									{moment(goal.end_at).fromNow(true)}
+									Осталось {moment(goal.end_at).fromNow(true)}
 								</p>
 							) : (
 								<></>
