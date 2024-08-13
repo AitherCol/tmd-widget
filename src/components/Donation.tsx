@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { DonationEvent, FontSettings } from "../types";
-import { formatMessage, formatName, sleep } from "../utils";
+import { DonationEvent } from "../types";
+import { formatMessage, formatName, getFontStyles, sleep } from "../utils";
 
 export default function Donation({
 	event,
@@ -154,26 +154,6 @@ export default function Donation({
 			event.socket.off("donations:skip");
 		};
 	}, [event]);
-
-	const getFontStyles = (settings: FontSettings) => {
-		return {
-			fontSize: settings.size,
-			color: settings.color,
-			fontWeight: settings.bold ? "bold" : "normal",
-			fontStyle: settings.italic ? "italic" : "normal",
-			fontDecoration: settings.underline ? "underline" : "none",
-			textTransform: settings.transform,
-			textShadow: `0px 0px ${settings.shadow_size}px ${
-				settings.shadow_color
-			}, 0px 0px ${settings.shadow_size + 1}px ${
-				settings.shadow_color
-			}, 0px 0px ${settings.shadow_size + 2}px ${
-				settings.shadow_color
-			}, 0px 0px ${settings.shadow_size + 3}px ${
-				settings.shadow_color
-			}, 0px 0px ${settings.shadow_size + 4}px ${settings.shadow_color}`,
-		};
-	};
 
 	return (
 		<div id="donation" className={`donation ${fadeClass}`}>

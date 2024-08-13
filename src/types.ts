@@ -48,3 +48,28 @@ export interface Page {
 	voice_speed: number;
 	voice_type: "maxim" | "svetlana" | "tatiana";
 }
+
+export interface Goal {
+	id: number;
+	user_id: number;
+	title: string;
+	currency: string;
+	amount: number;
+	goal_amount: number;
+	end_at: Date | null;
+	ended_at: string | null;
+	show_remaining_time: boolean;
+	show_goal_borders: boolean;
+	indicator_height: number;
+	border_radius: number;
+	stroke_radius: number;
+	stroke_color: string;
+	indicator_color: string;
+	indicator_filled_color: string;
+	title_settings: FontSettings;
+	progress_settings: FontSettings;
+	remaining_time_settings: FontSettings;
+	borders_settings: FontSettings;
+	created_at: string;
+	updated_at: string;
+}

@@ -1,4 +1,4 @@
-import { DonationEvent } from "./types";
+import { DonationEvent, FontSettings } from "./types";
 
 export function sleep(ms: number) {
 	return new Promise(resolve => setTimeout(resolve, ms));
@@ -64,4 +64,44 @@ export function removeEmojis(text: string) {
 
 	// Замена эмодзи на пустую строку
 	return text.replace(emojiRegex, "");
+}
+
+export const getFontStyles = (settings: FontSettings, type?: "px" | "vw") => {
+	if (!type) {
+		type = "px";
+	}
+	return {
+		fontSize: settings.size + `${type}`,
+		color: settings.color,
+		fontWeight: settings.bold ? "bold" : "normal",
+		fontStyle: settings.italic ? "italic" : "normal",
+		fontDecoration: settings.underline ? "underline" : "none",
+		textTransform: settings.transform,
+		textShadow: `0px 0px ${settings.shadow_size}px ${
+			settings.shadow_color
+		}, 0px 0px ${settings.shadow_size + 1}px ${
+			settings.shadow_color
+		}, 0px 0px ${settings.shadow_size + 2}px ${
+			settings.shadow_color
+		}, 0px 0px ${settings.shadow_size + 3}px ${
+			settings.shadow_color
+		}, 0px 0px ${settings.shadow_size + 4}px ${settings.shadow_color}`,
+	};
+};
+
+export function calculateProgress(
+	amount: number,
+	goal_amount: number,
+	round?: boolean
+): number {
+	if (goal_amount === 0) {
+		throw new Error("goal_amount не может быть равен 0");
+	}
+
+	const percentage = (amount / goal_amount) * 100;
+	let result = parseFloat(percentage.toFixed(2));
+	if (round && result > 100) {
+		result = 100;
+	}
+	return result;
 }
