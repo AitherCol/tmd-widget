@@ -43,7 +43,7 @@ function Goal() {
 
 		socket.on("connect", () => {
 			console.log("Connected to Socket.IO server");
-			socket.emit("authenticate", JSON.stringify({ token }));
+			socket.emit("authenticate", JSON.stringify({ token, ignoreNew: true }));
 		});
 
 		socket.on("donations:new", data => {
