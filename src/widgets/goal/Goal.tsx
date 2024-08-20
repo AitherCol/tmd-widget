@@ -8,6 +8,7 @@ import { io } from "socket.io-client";
 import { Goal as GoalType } from "../../types";
 import { calculateProgress, getFontStyles } from "../../utils";
 
+import useInterval from "../../hooks/useInterval";
 import "./Goal.css";
 
 moment.locale("ru");
@@ -17,6 +18,14 @@ function Goal() {
 	const token = urlParams.get("key");
 	const id = urlParams.get("id");
 	const [goal, setGoal] = useState<GoalType>();
+
+	const [time, setTime] = useState<string>("");
+
+	useInterval(() => {
+		if (goal && goal.show_remaining_time && goal.end_at && !goal.ended_at) {
+			setTime(moment(goal.end_at).fromNow(true));
+		}
+	}, 1000);
 
 	const getGoal = async () => {
 		try {
@@ -153,7 +162,7 @@ function Goal() {
 										textAlign: "center",
 									}}
 								>
-									Осталось {moment(goal.end_at).fromNow(true)}
+									Осталось {time}
 								</p>
 							) : (
 								<></>
