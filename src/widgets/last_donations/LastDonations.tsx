@@ -22,7 +22,7 @@ export default function LastDonations() {
 		(async () => {
 			try {
 				const { data } = await axios.get(
-					`https://api.tipmeadollar.com/internal/socket/donations?page=1&limit=25&token=${token}`
+					`https://api.tipmeadollar.com/public/donations?page=1&limit=25&token=${token}`
 				);
 				setDonations(data.donations.data);
 			} catch (error) {
@@ -113,7 +113,7 @@ export default function LastDonations() {
 						onClick={async () => {
 							try {
 								await axios.post(
-									`https://api.tipmeadollar.com/internal/socket/skip`,
+									`https://api.tipmeadollar.com/public/donations/skip_current`,
 									{ token: token }
 								);
 								toast.success("донат пропущен!");

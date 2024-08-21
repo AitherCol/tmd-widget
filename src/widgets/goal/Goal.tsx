@@ -30,7 +30,7 @@ function Goal() {
 	const getGoal = async () => {
 		try {
 			const { data } = await axios.get(
-				`https://api.tipmeadollar.com/internal/socket/goal?id=${id}&token=${token}`
+				`https://api.tipmeadollar.com/public/goal?id=${id}&token=${token}`
 			);
 
 			setGoal(data.goal);

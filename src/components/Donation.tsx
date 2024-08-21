@@ -136,7 +136,7 @@ export default function Donation({
 
 		(async () => {
 			try {
-				await axios.post("https://api.tipmeadollar.com/internal/socket/read", {
+				await axios.post("https://api.tipmeadollar.com/public/donations/read", {
 					id: event.donation.id,
 					token,
 				});
